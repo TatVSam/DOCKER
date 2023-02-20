@@ -42,6 +42,8 @@ services:
   db:
     image: mysql:5.7.22
     container_name: db
+    command:
+      --bind-address=0.0.0.0 
     ports:
       - "3306:3306"
     # описываем, какую БД мы создаём
@@ -51,9 +53,7 @@ services:
     volumes:
       - ./dbdata:/var/lib/mysql
     # проброс my.cnf c bind-address=0.0.0.0
-      - ./my.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf
-    command:
-      --bind-address=0.0.0.0  
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
     networks:
       - app-network
  
